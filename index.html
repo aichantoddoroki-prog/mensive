@@ -1,0 +1,581 @@
+<!DOCTYPE html><html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>For My Favorite Person 💌</title>  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Cormorant+Garamond:wght@400;500;600;700&family=Great+Vibes&display=swap" rel="stylesheet">  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      scroll-behavior: smooth;
+    }
+
+    :root {
+      --pink: #ffd6e7;
+      --soft-blue: #dbe8ff;
+      --dark-blue: #26304d;
+      --brown: #8a6a5c;
+      --cream: #fffaf7;
+      --white: #ffffff;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background:
+        linear-gradient(rgba(255,245,250,0.78), rgba(240,244,255,0.82)),
+        url('bg-main.jpg') center/cover fixed;
+      color: var(--dark-blue);
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background:
+        radial-gradient(circle at top left, rgba(255,214,231,0.55), transparent 30%),
+        radial-gradient(circle at bottom right, rgba(180,205,255,0.35), transparent 30%);
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    section {
+      min-height: 100vh;
+      padding: 80px 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      position: relative;
+    }
+
+    .glass {
+      width: 100%;
+      max-width: 1050px;
+      background: rgba(255,255,255,0.45);
+      border: 1px solid rgba(255,255,255,0.7);
+      backdrop-filter: blur(22px);
+      -webkit-backdrop-filter: blur(22px);
+      border-radius: 35px;
+      padding: 35px;
+      box-shadow: 0 15px 40px rgba(120,120,120,0.12);
+    }
+
+    .loading-screen {
+      position: fixed;
+      inset: 0;
+      background: linear-gradient(180deg, #ffe5ef, #eef3ff);
+      z-index: 9999;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      text-align: center;
+      transition: 1s ease;
+      padding: 25px;
+    }
+
+    .loading-screen h1 {
+      font-size: 2.7rem;
+      font-family: 'Cormorant Garamond', serif;
+      line-height: 1.5;
+      margin-bottom: 20px;
+      color: var(--dark-blue);
+    }
+
+    .loading-screen p {
+      max-width: 650px;
+      line-height: 1.9;
+      opacity: 0.8;
+      margin-bottom: 35px;
+    }
+
+    .open-btn,
+    .letter-btn {
+      border: none;
+      padding: 15px 32px;
+      border-radius: 999px;
+      background: linear-gradient(90deg, #ffcfe2, #dbe8ff);
+      color: var(--dark-blue);
+      font-weight: 600;
+      cursor: pointer;
+      transition: 0.3s;
+      box-shadow: 0 10px 20px rgba(255,192,216,0.3);
+    }
+
+    .open-btn:hover,
+    .letter-btn:hover {
+      transform: scale(1.05);
+    }
+
+    .hero-title {
+      font-family: 'Great Vibes', cursive;
+      font-size: 5rem;
+      color: #ff8db8;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    .hero-sub {
+      line-height: 2;
+      text-align: center;
+      max-width: 750px;
+      margin: auto;
+      opacity: 0.9;
+    }
+
+    .mini-poem {
+      margin-top: 35px;
+      text-align: center;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.4rem;
+      line-height: 1.9;
+      color: #7a5b6c;
+    }
+
+    .days-box {
+      margin: 35px auto 0;
+      width: fit-content;
+      background: rgba(255,255,255,0.6);
+      padding: 18px 28px;
+      border-radius: 22px;
+      border: 1px solid rgba(255,255,255,0.8);
+      font-weight: 500;
+    }
+
+    .section-title {
+      font-size: 2.7rem;
+      margin-bottom: 25px;
+      text-align: center;
+      font-family: 'Cormorant Garamond', serif;
+      color: #ff8db8;
+    }
+
+    .long-text {
+      line-height: 2.2;
+      font-size: 1rem;
+    }
+
+    .about-block {
+      margin-bottom: 28px;
+      background: rgba(255,255,255,0.5);
+      padding: 22px;
+      border-radius: 22px;
+    }
+
+    .memory-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 18px;
+      margin-top: 30px;
+    }
+
+    .media-card {
+      overflow: hidden;
+      border-radius: 25px;
+      background: white;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+      transition: 0.3s;
+    }
+
+    .media-card:hover {
+      transform: translateY(-5px) scale(1.02);
+    }
+
+    .media-card img,
+    .media-card video {
+      width: 100%;
+      height: 280px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .media-caption {
+      padding: 15px;
+      line-height: 1.7;
+      font-size: 0.95rem;
+    }
+
+    .memory-card {
+      background: rgba(255,255,255,0.5);
+      border-radius: 22px;
+      padding: 22px;
+      margin-bottom: 18px;
+      line-height: 1.9;
+    }
+
+    .letter-box {
+      margin-top: 25px;
+      line-height: 2.3;
+      max-height: 0;
+      overflow: hidden;
+      opacity: 0;
+      transition: 1s ease;
+    }
+
+    .letter-box.show {
+      max-height: 5000px;
+      opacity: 1;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 18px;
+      margin-top: 30px;
+    }
+
+    .stat-card {
+      background: rgba(255,255,255,0.6);
+      border-radius: 22px;
+      padding: 25px;
+      text-align: center;
+    }
+
+    .stat-card h2 {
+      color: #ff8db8;
+      margin-bottom: 10px;
+    }
+
+    .final-text {
+      text-align: center;
+      line-height: 2.2;
+      font-size: 1.1rem;
+    }
+
+    .footer-note {
+      text-align: center;
+      margin-top: 25px;
+      opacity: 0.7;
+    }
+
+    @media(max-width:768px){
+      .hero-title {
+        font-size: 3.7rem;
+      }
+
+      .glass {
+        padding: 25px;
+      }
+
+      .loading-screen h1 {
+        font-size: 2rem;
+      }
+
+      .media-card img,
+      .media-card video {
+        height: 220px;
+      }
+    }
+  </style></head>
+<body>  <div class="bg-blur pink"></div>
+  <div class="bg-blur blue"></div>  <!-- LOADING SCREEN -->  <div class="loading-screen" id="loadingScreen">
+    <h1>
+      for the person<br>
+      who slowly became my safest place.
+    </h1><p>
+  Di antara banyak hal yang datang dan pergi,
+  kamu tetap jadi seseorang yang selalu ingin aku simpan lebih lama.
+</p>
+
+<button class="open-btn" onclick="enterWebsite()">
+  open our story 
+</button>
+
+  </div>  <!-- HERO -->  <section>
+    <div class="glass"><!-- HERO PHOTO -->
+  <div style="display:flex; justify-content:center; margin-bottom:25px;">
+    <img src="hero.jpg"
+    style="width:170px; height:170px; object-fit:cover; border-radius:50%; border:5px solid rgba(255,255,255,0.7); box-shadow:0 10px 30px rgba(0,0,0,0.12);">
+  </div>
+
+  <h1 class="hero-title">
+    Happy Mensiversary 
+  </h1>
+
+  <p class="hero-sub">
+    Untuk dd ganteng kesayangan kk cantik...
+    makasih karena udah hadir dan bikin banyak bagian hidup aku terasa lebih hangat.
+    Website ini mungkin nggak bisa menjelaskan semuanya,
+    tapi setidaknya aku pengen kamu tau kalau kamu benar-benar berarti buat aku.
+  </p>
+
+  <div class="mini-poem">
+    “dan kalau semesta bertanya
+    apa hal paling indah yang pernah datang,
+    mungkin aku akan menyebut namamu pelan-pelan.”
+  </div>
+
+  <div class="days-box">
+    we've survived everything together ✨
+  </div>
+</div>
+
+  </section>  <!-- ABOUT YOU -->  <section>
+    <div class="glass">
+      <h2 class="section-title">
+        about you 
+      </h2><div class="long-text">
+
+    <div class="about-block">
+      Aku suka cara kamu hadir di hidup aku tanpa maksa.
+      Cara kamu bikin aku nyaman cuma lewat hal-hal kecil.
+      Cara kamu dengerin aku ngomong random, marah, sedih, bahkan waktu aku nggak ngerti cara ngejelasin isi kepala aku sendiri.
+    </div>
+
+    <div class="about-block">
+      Aku suka cara kamu bikin semuanya terasa lebih ringan.
+      Kadang kamu nggak sadar, tapi keberadaan kamu aja udah cukup buat bikin hari aku membaik.
+    </div>
+
+    <div class="about-block">
+      Dan dari semua hal tentang kamu,
+      mungkin yang paling aku suka adalah fakta kalau kamu berhasil bikin aku merasa dirayakan.
+      Bikin aku merasa cukup.
+      Bikin aku merasa dipilih.
+    </div>
+
+    <div class="about-block">
+      Aku nggak tau hubungan kita nanti bakal seperti apa.
+      Tapi sejauh ini,
+      aku seneng banget karena semesta pernah mempertemukan aku sama kamu.
+    </div>
+
+  </div>
+</div>
+
+  </section>  <!-- MEMORY -->  <section>
+    <div class="glass">
+      <h2 class="section-title">
+        our little universe 📸
+      </h2><div class="memory-card">
+    dari semua foto, video, dan chat random ini...
+    aku cuma mau bilang kalau aku seneng banget pernah punya banyak momen kecil sama kamu.
+  </div>
+
+  <div style="margin-bottom:30px;">
+    <img src="unfiltered-bg.jpg"
+    style="width:100%; border-radius:30px; object-fit:cover; max-height:450px; box-shadow:0 10px 30px rgba(0,0,0,0.08);">
+  </div>
+
+  <div class="memory-grid">
+
+    <div class="media-card">
+      <img src="chat1.jpg">
+      <div class="media-caption">
+        first chat
+      </div>
+    </div>
+
+    <div class="media-card">
+      <img src="foto1.jpg">
+      <div class="media-caption">
+        salah satu foto favorit kk cantik.
+      </div>
+    </div>
+
+    <div class="media-card">
+      <img src="chat2.jpg">
+      <div class="media-caption">
+        bukti kita random sejak awal.
+      </div>
+    </div>
+
+    <div class="media-card">
+      <video controls>
+        <source src="video1.mp4" type="video/mp4">
+      </video>
+      <div class="media-caption">
+        video kecil yang selalu bikin senyum sendiri.
+      </div>
+    </div>
+
+    <div class="media-card">
+      <img src="foto3.jpg">
+      <div class="media-caption">
+        pretty moments with pretty person.
+      </div>
+    </div>
+
+    <div class="media-card">
+      <img src="chat3.jpg">
+      <div class="media-caption">
+        salah satu chat favorit sepanjang masa 
+      </div>
+    </div>
+
+    <div class="media-card">
+      <img src="foto2.jpg">
+      <div class="media-caption">
+        lucu banget jadi pengen simpen terus.
+      </div>
+    </div>
+
+    <div class="media-card">
+      <video controls>
+        <source src="video2.mp4" type="video/mp4">
+      </video>
+      <div class="media-caption">
+        another little memory.
+      </div>
+    </div>
+
+    <div class="media-card">
+      <img src="foto3.jpg">
+      <div class="media-caption">
+        you make everything prettier.
+      </div>
+    </div>
+
+    <div class="media-card">
+      <img src="chat4.jpg">
+      <div class="media-caption">
+        chat yang bikin senyum sendiri jam 2 pagi 
+      </div>
+    </div>
+
+  </div>
+</div>
+
+  </section>  <!-- SECRET LETTER -->  <section>
+    <div class="glass">
+      <h2 class="section-title">
+        secret letter 💌
+      </h2><p>
+    ada sesuatu yang pengen kk bilang pelan-pelan ke dd.
+  </p>
+
+  <button class="letter-btn" onclick="openLetter()">
+    read with care
+  </button>
+
+  <div class="letter-box" id="letterBox">
+    Untuk dd ganteng aku...
+    
+    Aku gak pernah nyangka kalau seseorang bisa hadir sesederhana ini,
+    tapi ninggalin perasaan yang sedalam ini.
+    
+    Kamu datang tanpa suara besar,
+    tanpa janji yang terlalu tinggi,
+    tapi perlahan kamu berhasil jadi tempat yang paling nyaman.
+    
+    Terimakasih karena udah sabar sama semua sisi aku.
+    sisi yang berisik,
+    sisi yang terlalu banyak mikir,
+    sisi yang kadang moodyan.
+    
+    Dan di tengah semua itu,
+    kamu tetap tinggal.
+    
+    Mungkin aku gak selalu pandai menunjukkan rasa sayang.
+    Tapi percayalah,
+    setiap hal kecil tentang kamu selalu punya tempat spesial di hati aku.
+    
+    Cara kamu ngomong,
+    cara kamu bikin senyum setiap harinya,
+    cara kamu mencintai aku,
+    semuanya selalu berhasil bikin aku jatuh lebih dalam.
+    
+    Kalau suatu hari nanti kamu ngerasa dunia terlalu berat,
+    aku harap kamu inget kalau pernah ada seseorang yang sesayang ini sama kamu.
+    seseorang yang selalu bangga punya kamu.
+    
+    Dan kalau aku boleh jujur...
+    kamu adalah salah satu hal terbaik yang pernah datang di hidup aku.
+  </div>
+</div>
+
+  </section>  <!-- CHAOS STATS -->  <section>
+    <div class="glass">
+      <h2 class="section-title">
+        relationship stats 👀
+      </h2><div class="stats">
+
+    <div class="stat-card">
+      <h2>∞</h2>
+      <p>jumlah kangen</p>
+    </div>
+
+    <div class="stat-card">
+      <h2>100%</h2>
+      <p>sayang ke dd ganteng</p>
+    </div>
+
+    <div class="stat-card">
+      <h2>999+</h2>
+      <p>random talk</p>
+    </div>
+
+    <div class="stat-card">
+      <h2>24/7</h2>
+      <p>always thinking about u</p>
+    </div>
+
+  </div>
+</div>
+
+  </section>  <!-- FINAL -->  <section>
+    <div class="glass">
+      <h2 class="section-title">
+        the best part 🌙
+      </h2><div class="final-text">
+    Terima kasih karena sudah hadir di hidup aku.
+    
+    Untuk semua tawa,
+    semua rasa nyaman,
+    dan semua hal kecil yang berhasil bikin hari-hari aku terasa lebih hidup.
+    
+    Semoga nanti,
+    sejauh apa pun waktu berjalan,
+    kita tetap jadi dua orang yang saling memilih satu sama lain.
+  </div>
+
+  <p class="footer-note">
+    made with all my love, by kk cantik 💖
+  </p>
+</div>
+
+  </section>  <!-- AUDIO -->  <!-- Instrumental Sempurna -->  <audio id="introMusic">
+    <source src="sempurna.mp3" type="audio/mpeg">
+  </audio>  <!-- Semua Aku Dirayakan -->  <audio id="mainMusic">
+    <source src="sad.mp3" type="audio/mpeg">
+  </audio>  <!-- Best Part -->  <audio id="endingMusic">
+    <source src="bestpart.mp3" type="audio/mpeg">
+  </audio>  <script>
+    const introMusic = document.getElementById('introMusic');
+    const mainMusic = document.getElementById('mainMusic');
+    const endingMusic = document.getElementById('endingMusic');
+
+    function enterWebsite() {
+      document.getElementById('loadingScreen').style.opacity = '0';
+      document.getElementById('loadingScreen').style.pointerEvents = 'none';
+
+      introMusic.pause();
+      mainMusic.play();
+    }
+
+    window.onload = () => {
+      introMusic.play();
+    }
+
+    function openLetter() {
+      document.getElementById('letterBox').classList.toggle('show');
+    }
+
+    // Play ending music near final section
+    window.addEventListener('scroll', () => {
+      const scrollY = window.scrollY;
+      const totalHeight = document.body.scrollHeight - window.innerHeight;
+
+      if(scrollY > totalHeight * 0.75) {
+        if(!endingMusic.played.length) {
+          mainMusic.pause();
+          endingMusic.play();
+        }
+      }
+    });
+  </script></body>
+</html>
